@@ -8,10 +8,13 @@ Script add-on.
 US policy / LD / PF debate. Its desktop version is a Word `.dotm` — which
 means it doesn't work on Chromebooks, doesn't work in Google Docs, and
 trips antivirus. This project gives your entire team the same workflow in
-Google Docs with a single installation.
+Google Docs.
+
+**Install it:** **[ezlau8-cmyk.github.io/verbatim](https://ezlau8-cmyk.github.io/verbatim/)**
+— one page, click each filename in order, paste into a new Apps Script project, done.
 
 **Status:** Production-ready. 37 unit tests pass, including large-doc and
-edge-case stress. See [CHANGELOG](docs/CHANGELOG.md) for what's been verified.
+edge-case stress. See [docs/CHANGELOG.md](docs/CHANGELOG.md) for what's been verified.
 
 ---
 
