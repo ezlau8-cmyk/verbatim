@@ -1,0 +1,28 @@
+{
+  "timeZone": "America/Los_Angeles",
+  "dependencies": {},
+  "exceptionLogging": "STACKDRIVER",
+  "runtimeVersion": "V8",
+  "oauthScopes": [
+    "https://www.googleapis.com/auth/documents.currentonly",
+    "https://www.googleapis.com/auth/script.container.ui",
+    "https://www.googleapis.com/auth/drive.file"
+  ],
+  "addOns": {
+    "common": {
+      "name": "Verbatim for Google Docs",
+      "logoUrl": "https://raw.githubusercontent.com/ashtarcommunications/verbatim/main/desktop/assets/icons/verbatim.ico",
+      "homepageTrigger": {
+        "runFunction": "onHomepage"
+      },
+      "onOpenTrigger": {
+        "runFunction": "onOpen"
+      }
+    },
+    "docs": {
+      "onOpenTrigger": {
+        "runFunction": "onOpen"
+      }
+    }
+  }
+}

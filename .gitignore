@@ -18,3 +18,6 @@ v8-compile-cache-0/
 ~*
 VBADecompiler.ini
 .DS_Store
+
+# Verbatim for Google Docs
+gdocs/.clasp.json
