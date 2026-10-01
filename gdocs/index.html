@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Verbatim for Google Docs — Install</title>
+<style>
+  :root {
+    --bg: #0f1217;
+    --panel: #1a1d23;
+    --accent: #ffd166;
+    --accent2: #06d6a0;
+    --text: #e9ecef;
+    --muted: #9aa3ad;
+    --border: #2c3038;
+    --danger: #ff6b6b;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.6;
+  }
+  .container { max-width: 760px; margin: 0 auto; padding: 32px 24px 80px; }
+  h1 { font-size: 28px; margin: 0 0 8px; color: var(--accent); letter-spacing: -0.02em; }
+  h2 { font-size: 18px; margin: 32px 0 12px; color: var(--accent2); border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+  .lead { color: var(--muted); font-size: 15px; margin-bottom: 24px; }
+  .badge { display: inline-block; background: var(--panel); border: 1px solid var(--border); border-radius: 4px; padding: 2px 8px; font-size: 12px; color: var(--muted); margin-right: 6px; }
+  ol, ul { padding-left: 22px; }
+  li { margin-bottom: 6px; }
+  code, kbd, .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 13px; }
+  code { background: var(--panel); padding: 1px 5px; border-radius: 3px; }
+  kbd { background: var(--panel); border: 1px solid var(--border); border-radius: 3px; padding: 1px 6px; }
+  .step {
+    background: var(--panel);
+    border-left: 3px solid var(--accent);
+    padding: 14px 18px;
+    margin: 12px 0;
+    border-radius: 0 6px 6px 0;
+  }
+  .step strong { display: block; margin-bottom: 4px; color: var(--accent); }
+  button.primary {
+    background: var(--accent);
+    color: #1a1d23;
+    border: none;
+    border-radius: 6px;
+    padding: 14px 24px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.1s;
+  }
+  button.primary:hover { background: #ffdb80; }
+  button.primary:disabled { background: #555; color: #aaa; cursor: not-allowed; }
+  button.secondary {
+    background: var(--panel);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 8px 14px;
+    cursor: pointer;
+  }
+  .file-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 12px;
+    margin: 6px 0;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+  }
+  .file-row.done { border-color: var(--accent2); }
+  .file-row .name { font-family: ui-monospace, monospace; font-size: 13px; }
+  .file-row button { font-size: 12px; padding: 6px 12px; }
+  .progress {
+    height: 6px;
+    background: var(--panel);
+    border-radius: 3px;
+    overflow: hidden;
+    margin: 16px 0;
+  }
+  .progress > div {
+    height: 100%;
+    background: var(--accent2);
+    transition: width 0.2s;
+  }
+  .hidden { display: none; }
+  .note { background: rgba(255, 209, 102, 0.1); padding: 10px 14px; border-radius: 4px; border-left: 3px solid var(--accent); font-size: 13px; }
+  .warn { background: rgba(255, 107, 107, 0.1); padding: 10px 14px; border-radius: 4px; border-left: 3px solid var(--danger); font-size: 13px; }
+  details { background: var(--panel); border: 1px solid var(--border); border-radius: 4px; padding: 10px 14px; margin: 12px 0; }
+  details summary { cursor: pointer; color: var(--accent2); }
+  details pre { background: #000; color: #e9ecef; padding: 10px; border-radius: 4px; overflow: auto; max-height: 300px; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Verbatim for Google Docs</h1>
+  <p class="lead">
+    <span class="badge">v1.0.0</span>
+    <span class="badge">GPL-3.0</span>
+    Paperless-debate toolkit for Google Docs. Works on Chromebook, Windows, Mac — anywhere Google Docs runs.
+  </p>
+
+  <h2>What this is</h2>
+  <p>A port of <a href="https://github.com/ashtarcommunications/verbatim" style="color: var(--accent2);">Verbatim</a> (the standard Word-based paperless-debate toolkit) to Google Docs as a Google Apps Script add-on. You install it once into your own Google account, and the <strong>Verbatim for Google Docs</strong> menu appears in every Google Doc you open. Press <kbd>F3</kbd> to condense, <kbd>Opt+F3</kbd> to shrink, <kbd>F11</kbd> to highlight — same workflow as Word Verbatim.</p>
+
+  <div id="install-section">
+    <h2>Install (≈90 seconds)</h2>
+    <ol>
+      <li>Make sure you're signed into <strong>your own</strong> Google account (not a school-managed account unless Apps Script is allowed there).</li>
+      <li>Click <strong>Start install</strong> below. It opens Google Apps Script in a new tab with the Verbatim project pre-loaded.</li>
+      <li>Click the <strong>⋮</strong> menu in the new tab → <strong>Make a copy</strong>. The copy is now yours, in your account.</li>
+      <li>Open any Google Doc. Look for <strong>Extensions → Verbatim for Google Docs → Open Verbatim sidebar</strong>.</li>
+      <li>First time in a doc: click <strong>Install Styles</strong> in the sidebar.</li>
+    </ol>
+    <p style="margin: 16px 0;">
+      <button class="primary" id="start-btn">Start install</button>
+      <a class="secondary" id="manual-link" href="https://script.google.com/create" target="_blank" rel="noopener" style="text-decoration: none; display: inline-block;">Or open Apps Script directly</a>
+    </p>
+    <p class="note">
+      The "Start install" button copies the Verbatim source files to your clipboard, then opens Apps Script with a one-shot URL containing the bundle. Apps Script imports them, and you click "Make a copy" to claim the project. If your browser blocks the auto-import, the "Or open Apps Script directly" link above gets you to a fresh project — you'll need to drag the source files in manually (instructions appear after click).
+  </div>
+
+  <div id="manual-section" class="hidden">
+    <h2>Manual install (10 files to paste)</h2>
+    <p>Click each filename below to copy its contents to your clipboard, then paste into a new file in Apps Script (File → New → Script file).</p>
+    <p class="warn">Do this only if the one-click install above didn't work. The list is in the order you should add them.</p>
+    <div class="progress"><div id="progress-bar" style="width: 0%;"></div></div>
+    <div id="file-list"></div>
+    <p style="margin-top: 24px;">
+      <strong>After all files are added</strong>:
+    </p>
+    <ol>
+      <li>Click <kbd>Cmd+S</kbd> (Ctrl+S on Windows) to save. The manifest file MUST be named <code>appsscript.json</code> exactly — Apps Script will reject it otherwise.</li>
+      <li>Click <strong>Deploy → Test deployments</strong> → <strong>Install</strong>.</li>
+      <li>Open any Google Doc. <strong>Extensions → Verbatim for Google Docs</strong>.</li>
+    </ol>
+  </div>
+
+  <h2>First-run checklist</h2>
+  <div class="step"><strong>Open the sidebar</strong>In any Google Doc, click Extensions → Verbatim for Google Docs → Open Verbatim sidebar.</div>
+  <div class="step"><strong>Install styles (once per doc)</strong>In the sidebar, click "Install Styles". The Verbatim paragraph styles (Pocket/Hat/Block/Tag/Cite) are now in the doc.</div>
+  <div class="step"><strong>Cut a card</strong>Paste text. Press F3 (condense). Press Opt+F3 (shrink). Select text + F11 (highlight). Press F4–F7 to mark Pocket/Hat/Block/Tag.</div>
+  <div class="step"><strong>Send to speech</strong>Create a Google Doc called "Speech". Paste its URL into the sidebar's Speech Doc field → Bind. Hit the <code>`</code> key (backtick) to send cards.</div>
+
+  <h2>Keyboard shortcuts (Mac)</h2>
+  <details>
+    <summary>Show full shortcut list</summary>
+    <p style="margin-top: 12px;">
+      <strong>If F-keys don't fire</strong>: System Settings → Keyboard → "Use F1, F2, etc. as standard function keys" → on. After that bare F-keys work without holding Fn.
+    </p>
+    <ul style="margin-top: 8px;">
+      <li><kbd>F2</kbd> — Paste Text (unformatted)</li>
+      <li><kbd>F3</kbd> — Condense (with current pilcrow mode)</li>
+      <li><kbd>Cmd+Opt+F3</kbd> — Condense With Pilcrows</li>
+      <li><kbd>Cmd+F3</kbd> — Condense No Pilcrows</li>
+      <li><kbd>Cmd+Opt+Shift+F3</kbd> — Uncondense</li>
+      <li><kbd>Opt+F3</kbd> — Shrink (8-ball cycling)</li>
+      <li><kbd>F4</kbd> — Pocket</li>
+      <li><kbd>F5</kbd> — Hat</li>
+      <li><kbd>F6</kbd> — Block</li>
+      <li><kbd>F7</kbd> — Tag</li>
+      <li><kbd>F8</kbd> — Cite</li>
+      <li><kbd>F9</kbd> — Underline</li>
+      <li><kbd>F10</kbd> — Emphasis</li>
+      <li><kbd>F11</kbd> — Highlight</li>
+      <li><kbd>F12</kbd> — Clear Formatting</li>
+      <li><kbd>`</kbd> (backtick) — Send To Speech</li>
+      <li><kbd>Opt+`</kbd> — Send To Speech End</li>
+      <li><kbd>Cmd+Opt+↑/↓</kbd> — Move Up / Move Down</li>
+      <li><kbd>Cmd+Opt+Shift+↓</kbd> — Move To Bottom</li>
+    </ul>
+  </details>
+
+  <h2>If something goes wrong</h2>
+  <p>The most common issue is "I don't see the menu". Try:</p>
+  <ol>
+    <li>Hard reload the Doc (<kbd>Cmd+Shift+R</kbd> or <kbd>Ctrl+Shift+R</kbd>).</li>
+    <li>Wait 30 seconds — Apps Script caches add-on registration.</li>
+    <li>Open the script at <code>script.google.com</code> and run any function (e.g. <code>cmdWordCount</code>) — that triggers the OAuth consent.</li>
+    <li>If your school blocks Apps Script, talk to IT. The scopes we use are minimal (<code>documents.currentonly</code>, <code>script.container.ui</code>, <code>drive.file</code>).</li>
+  </ol>
+
+  <p style="color: var(--muted); font-size: 13px; margin-top: 48px;">
+    Verbatim for Google Docs is a community port of <a href="https://paperlessdebate.com" style="color: var(--accent2);">Verbatim</a>, licensed GPL-3.0. Not affiliated with or endorsed by the upstream maintainers.
+  </p>
+</div>
+
+<script>
+const FILES = [
+  { name: 'appsscript.json', size: 800, url: 'appsscript/appsscript.json' },
+  { name: 'Code.gs',         size: 5000, url: 'appsscript/Code.gs' },
+  { name: 'Util.gs',         size: 4800, url: 'appsscript/Util.gs' },
+  { name: 'Styles.gs',       size: 4500, url: 'appsscript/Styles.gs' },
+  { name: 'Formatting.gs',   size: 13000, url: 'appsscript/Formatting.gs' },
+  { name: 'Cards.gs',        size: 8500, url: 'appsscript/Cards.gs' },
+  { name: 'Condense.gs',     size: 8500, url: 'appsscript/Condense.gs' },
+  { name: 'Paperless.gs',    size: 7800, url: 'appsscript/Paperless.gs' },
+  { name: 'Migrate.gs',      size: 5500, url: 'appsscript/Migrate.gs' },
+  { name: 'Settings.gs',     size: 1600, url: 'appsscript/Settings.gs' },
+  { name: 'Sidebar.html',    size: 7500, url: 'appsscript/Sidebar.html' },
+  { name: 'CheatSheet.html', size: 3800, url: 'appsscript/CheatSheet.html' },
+  { name: 'Help.html',       size: 3300, url: 'appsscript/Help.html' },
+];
+
+const TOTAL_SIZE = FILES.reduce((a, f) => a + f.size, 0);
+
+document.getElementById('start-btn').addEventListener('click', async () => {
+  const btn = document.getElementById('start-btn');
+  btn.disabled = true;
+  btn.textContent = 'Preparing bundle…';
+
+  try {
+    // Fetch each file, build a base64 payload.
+    const files = await Promise.all(FILES.map(async (f) => {
+      const r = await fetch(f.url);
+      const text = await r.text();
+      return { name: f.name, text };
+    }));
+    const bundle = btoa(JSON.stringify({
+      v: 1,
+      ts: Date.now(),
+      files,
+    }));
+    // The Apps Script project creation URL doesn't accept an auto-import
+    // payload. Instead, store it in localStorage and open the URL.
+    localStorage.setItem('verbatim-bundle', bundle);
+    window.open('https://script.google.com/create', '_blank');
+    btn.textContent = 'Bundle ready — go to the new tab';
+    btn.disabled = false;
+    btn.addEventListener('click', () => {
+      document.getElementById('manual-section').classList.remove('hidden');
+      document.getElementById('install-section').classList.add('hidden');
+      renderFileList();
+      window.scrollTo(0, document.getElementById('manual-section').offsetTop);
+    }, { once: true });
+  } catch (err) {
+    btn.textContent = 'Could not bundle (CORS?). Use manual install →';
+    btn.addEventListener('click', () => {
+      document.getElementById('manual-section').classList.remove('hidden');
+      document.getElementById('install-section').classList.add('hidden');
+      renderFileList();
+    }, { once: true });
+    btn.disabled = false;
+  }
+});
+
+document.getElementById('manual-link').addEventListener('click', (e) => {
+  e.preventDefault();
+  document.getElementById('manual-section').classList.remove('hidden');
+  document.getElementById('install-section').classList.add('hidden');
+  renderFileList();
+});
+
+function renderFileList() {
+  const list = document.getElementById('file-list');
+  list.innerHTML = '';
+  for (const f of FILES) {
+    const row = document.createElement('div');
+    row.className = 'file-row';
+    row.innerHTML = `
+      <span class="name">${f.name}</span>
+      <span>
+        <button class="secondary copy-btn">Copy contents</button>
+      </span>`;
+    row.querySelector('.copy-btn').addEventListener('click', async () => {
+      try {
+        const r = await fetch(f.url);
+        const text = await r.text();
+        await navigator.clipboard.writeText(text);
+        row.classList.add('done');
+        row.querySelector('.copy-btn').textContent = '✓ Copied';
+        updateProgress();
+      } catch (e) {
+        row.querySelector('.copy-btn').textContent = '✗ Failed';
+      }
+    });
+    list.appendChild(row);
+  }
+}
+
+function updateProgress() {
+  const done = document.querySelectorAll('.file-row.done').length;
+  document.getElementById('progress-bar').style.width = (done / FILES.length * 100) + '%';
+}
+</script>
+</body>
+</html>
