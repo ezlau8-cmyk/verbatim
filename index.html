@@ -125,12 +125,25 @@
 
   <h2>Install — three clicks, ~90 seconds</h2>
 
+  <div class="warn" style="background: rgba(255, 107, 107, 0.12); border-left-color: var(--danger);">
+    <strong style="color: var(--danger); display: block; margin-bottom: 6px;">⚠️ Sign in to your SCHOOL account first</strong>
+    Your school has Apps Script enabled. Your personal account does not. Before you click anything else:
+    <ol style="margin-top: 8px;">
+      <li>Click your profile picture (top right of any Google page).</li>
+      <li>Select your <strong>school account</strong> (e.g. <code>you@school.edu</code>) — NOT your personal Gmail.</li>
+      <li>Confirm by checking the profile chip again — it should show your school email.</li>
+    </ol>
+    If you're already signed in to your personal account, the OAuth screen will reject the script and you'll see "This app is blocked" or "Access denied". Switch accounts first.
+  </div>
+
   <div class="step">
     <strong>Step 1 — Open Apps Script</strong>
-    Make sure you're signed into <em>your own</em> Google account (not a school-managed account unless Apps Script is allowed there). Click below to open a fresh Apps Script project in a new tab.
+    With your school account active, click below to open a fresh Apps Script project in a new tab.
   </div>
   <p>
     <button class="primary" id="open-apps-script">Open Google Apps Script</button>
+    <button class="secondary" id="check-account" style="margin-left: 8px;">Check which Google account I'm signed in to</button>
+    <span id="account-status" style="margin-left: 12px; color: var(--muted); font-size: 13px;"></span>
   </p>
 
   <div class="step">
@@ -209,10 +222,12 @@
 
   <h2>If something goes wrong</h2>
   <ol>
-    <li><strong>Menu doesn't show:</strong> hard-reload the Doc (<kbd>Cmd+Shift+R</kbd>). Wait 30 seconds.</li>
-    <li><strong>"Apps Script is disabled" / OAuth blocked:</strong> talk to IT. The scopes we use are minimal.</li>
+    <li><strong>"This app is blocked" / "Access denied" / "Apps Script is disabled":</strong> You're on the wrong account. Click your profile picture (top right of the Apps Script tab) and switch to your <strong>school account</strong>. Try Step 1 again.</li>
+    <li><strong>OAuth consent doesn't show your school account:</strong> the Apps Script project opened in your personal Gmail. Close that tab, switch to your school account, click Step 1 again.</li>
+    <li><strong>Menu doesn't show after install:</strong> hard-reload the Doc (<kbd>Cmd+Shift+R</kbd>). Wait 30 seconds. Apps Script caches add-on registration.</li>
     <li><strong>"Can't find file appsscript.json":</strong> you didn't enable "Show manifest file" in Project Settings. See step 3.</li>
     <li><strong>Paste button copies nothing:</strong> your browser may be blocking clipboard access. Open the file manually at <a href="https://github.com/ezlau8-cmyk/verbatim/tree/master/gdocs/appsscript">github.com/ezlau8-cmyk/verbatim/tree/master/gdocs/appsscript</a>, copy from there.</li>
+    <li><strong>"This script has too many OAuth scopes":</strong> your school admin may need to approve the scopes. Send IT this list: <code>documents.currentonly</code>, <code>script.container.ui</code>, <code>drive.file</code>.</li>
   </ol>
 
   <p style="color: var(--muted); font-size: 13px; margin-top: 48px;">
@@ -243,6 +258,14 @@ const FILES = [
 // Step 1: open Apps Script in a new tab.
 document.getElementById('open-apps-script').addEventListener('click', () => {
   window.open('https://script.google.com/create', '_blank');
+});
+
+// Account check: open myaccount.google.com so the user sees the active
+// account chip. If they're signed into the wrong one, they can switch.
+document.getElementById('check-account').addEventListener('click', () => {
+  window.open('https://myaccount.google.com/', '_blank');
+  document.getElementById('account-status').textContent =
+    'New tab: confirm the email shown is your SCHOOL account (you@school.edu), not personal Gmail.';
 });
 
 // Step 2 + 3: render the file list with copy buttons.
