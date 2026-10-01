@@ -123,7 +123,7 @@
   <h2>What this is</h2>
   <p>A port of <a href="https://github.com/ashtarcommunications/verbatim">Verbatim</a> (the standard Word-based paperless-debate toolkit) to Google Docs as a Google Apps Script add-on. After you install it once, the <strong>Verbatim for Google Docs</strong> menu appears in every Google Doc you open. Press <kbd>F3</kbd> to condense, <kbd>Opt+F3</kbd> to shrink, <kbd>F11</kbd> to highlight — same workflow as Word Verbatim.</p>
 
-  <h2>Install — three clicks, ~90 seconds</h2>
+  <h2>Install — five pastes, ~60 seconds</h2>
 
   <div class="warn" style="background: rgba(255, 107, 107, 0.12); border-left-color: var(--danger);">
     <strong style="color: var(--danger); display: block; margin-bottom: 6px;">⚠️ Sign in to your SCHOOL account first</strong>
@@ -147,12 +147,13 @@
   </p>
 
   <div class="step">
-    <strong>Step 2 — Paste the source files</strong>
-    In the new tab, you'll see an empty script with a `function myFunction() {}` placeholder. Below is every Verbatim source file. For each one:
+    <strong>Step 2 — Paste the five files</strong>
+    In the new tab, you'll see an empty script with a `function myFunction() {}` placeholder. The bundle below has <strong>five files total</strong>: one big <code>Code.gs</code> containing all the Verbatim modules, one <code>appsscript.json</code> manifest, and three HTML files. For each one:
     <ol>
       <li>Click the filename's <strong>Copy contents</strong> button (in this page).</li>
       <li>Switch to the Apps Script tab.</li>
-      <li>Click <kbd>File → New → Script file</kbd>, type the filename exactly (including the extension), press Enter.</li>
+      <li>For <code>Code.gs</code>: just paste into the placeholder file, overwriting <code>myFunction</code>.</li>
+      <li>For other files: click <kbd>File → New → Script file</kbd> (or HTML file), type the filename exactly (including the extension), press Enter.</li>
       <li>Paste the code you copied. <kbd>Cmd+S</kbd> (or <kbd>Ctrl+S</kbd>) to save.</li>
     </ol>
     <p style="color: var(--muted); font-size: 13px;">Repeat for each file. <code>appsscript.json</code> is special — see step 3.</p>
@@ -163,12 +164,13 @@
 
   <div class="step">
     <strong>Step 3 — Add the manifest file (<code>appsscript.json</code>)</strong>
-    In the Apps Script editor, click the **Project Settings (⚙️)** gear icon → check <strong>"Show 'appsscript.json' manifest in editor"</strong>. A new file appears in the left sidebar.
+    In the Apps Script editor, click the <strong>Project Settings (⚙️)</strong> gear icon → check <strong>"Show 'appsscript.json' manifest in editor"</strong>. A new file appears in the left sidebar.
     <ol>
       <li>Click it. Delete its current contents.</li>
       <li>Come back here, click <strong>Copy contents</strong> on the <code>appsscript.json</code> row.</li>
       <li>Paste into the Apps Script manifest. <kbd>Cmd+S</kbd> to save.</li>
     </ol>
+    <p style="color: var(--muted); font-size: 13px;">(If you're using the bundle and already created appsscript.json via File → New, just paste over its default contents.)</p>
   </div>
 
   <div class="step">
@@ -236,23 +238,17 @@
 </div>
 
 <script>
-// The list of canonical Verbatim source files. Sizes are rough character counts
-// (the actual sizes vary slightly per release). URLs are relative to the page,
+// The list of canonical Verbatim source files. URLs are relative to the page,
 // which lives at https://ezlau8-cmyk.github.io/verbatim/.
+//
+// "bundle/" = the single-file-bundle path (5 files instead of 13). Use this
+// unless you specifically want to inspect each module separately.
 const FILES = [
-  { name: 'Code.gs',         url: 'gdocs/appsscript/Code.gs' },
-  { name: 'Util.gs',         url: 'gdocs/appsscript/Util.gs' },
-  { name: 'Styles.gs',       url: 'gdocs/appsscript/Styles.gs' },
-  { name: 'Formatting.gs',   url: 'gdocs/appsscript/Formatting.gs' },
-  { name: 'Cards.gs',        url: 'gdocs/appsscript/Cards.gs' },
-  { name: 'Condense.gs',     url: 'gdocs/appsscript/Condense.gs' },
-  { name: 'Paperless.gs',    url: 'gdocs/appsscript/Paperless.gs' },
-  { name: 'Migrate.gs',      url: 'gdocs/appsscript/Migrate.gs' },
-  { name: 'Settings.gs',     url: 'gdocs/appsscript/Settings.gs' },
-  { name: 'Sidebar.html',    url: 'gdocs/appsscript/Sidebar.html' },
-  { name: 'CheatSheet.html', url: 'gdocs/appsscript/CheatSheet.html' },
-  { name: 'Help.html',       url: 'gdocs/appsscript/Help.html' },
-  { name: 'appsscript.json', url: 'gdocs/appsscript/appsscript.json', isManifest: true },
+  { name: 'Code.gs',         url: 'gdocs/bundle/Code.gs',         isManifest: false, note: 'single-file bundle (~58 KB, contains all modules)' },
+  { name: 'appsscript.json', url: 'gdocs/bundle/appsscript.json', isManifest: true,  note: 'manifest — paste last' },
+  { name: 'Sidebar.html',    url: 'gdocs/bundle/Sidebar.html',    isManifest: false },
+  { name: 'CheatSheet.html', url: 'gdocs/bundle/CheatSheet.html', isManifest: false },
+  { name: 'Help.html',       url: 'gdocs/bundle/Help.html',       isManifest: false },
 ];
 
 // Step 1: open Apps Script in a new tab.

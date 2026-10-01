@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<base target="_top">
+<style>
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; padding: 22px; color: #222; max-width: 720px; line-height: 1.55; }
+  h1 { font-size: 22px; margin: 0 0 4px; }
+  h2 { font-size: 16px; margin: 18px 0 6px; color: #444; }
+  code { background: #f5f5f5; padding: 1px 5px; border-radius: 3px; font-size: 13px; }
+  .lead { font-size: 13px; color: #666; }
+  .step { background: #fafafa; border-left: 3px solid #ffd166; padding: 10px 14px; margin: 8px 0; border-radius: 0 4px 4px 0; }
+  .step strong { display: block; margin-bottom: 4px; }
+</style>
+</head>
+<body>
+<h1>Verbatim for Google Docs</h1>
+<p class="lead">An open-source, GPL3-0 paperless-debate toolkit ported from the original
+Word desktop template (<a href="https://github.com/ashtarcommunications/verbatim" target="_blank">ashtarcommunications/verbatim</a>).</p>
+
+<h2>Quickstart</h2>
+<div class="step"><strong>1. Install</strong>Use the deployment link your captain shared.
+Click <em>Install</em> and grant the requested permissions.</div>
+<div class="step"><strong>2. Open a Doc</strong>Open (or create) any Google Doc.</div>
+<div class="step"><strong>3. Open the sidebar</strong><em>Extensions → Verbatim for Google Docs → Open Verbatim sidebar</em>.</div>
+<div class="step"><strong>4. Install styles</strong>Click <em>Install Styles</em> in the sidebar. You only need to do this once per doc.</div>
+<div class="step"><strong>5. Cut a card</strong>Paste text, press <code>F2</code> or click <em>Paste Text</em>. Use <em>Condense</em> (<code>F3</code>), then <em>Shrink</em> (<code>⌥F3</code>), then highlight (<code>F11</code>) the parts you want to read aloud. Press <code>F4</code>–<code>F7</code> to mark the surrounding Pocket/Hat/Block/Tag.</div>
+
+<h2>Document structure</h2>
+<p>Verbatim uses four heading levels that map to Google Docs headings:</p>
+<ul>
+  <li><code>F4</code> Pocket (Heading 1)</li>
+  <li><code>F5</code> Hat (Heading 2)</li>
+  <li><code>F6</code> Block (Heading 3)</li>
+  <li><code>F7</code> Tag (Heading 4) — the smallest unit, usually one card</li>
+</ul>
+<p>Card text is normal text; cites are bold normal-text paragraphs (apply with <code>F8</code>).</p>
+
+<h2>Paperless flow</h2>
+<p>Bind a Speech document from the sidebar (paste its URL). Then <em>Send To Speech</em> (<code>`</code>) sends the current card to the bound speech doc. While inside the speech doc, <em>Mark Card</em> drops a timestamped marker.</p>
+
+<h2>Coming from Word Verbatim?</h2>
+<p>All core actions are 1:1. Some platform differences:</p>
+<ul>
+  <li><strong>Pilcrows (¶)</strong> are inserted as plain characters, not as hidden field codes. They look the same and round-trip cleanly.</li>
+  <li><strong>Reading view</strong> uses Google Docs' built-in reader mode (no need for a Verbatim toggle).</li>
+  <li><strong>Macros that rely on Word's VBA</strong> (OCR, Caselist, Tabroom share, NSIS installer) are <em>not</em> implemented in this version — see the <em>Limitations</em> tab.</li>
+</ul>
+
+<h2>Getting help</h2>
+<p>Run <em>Help → Cheat Sheet</em> for shortcuts. See the <em>Verbatim Help</em> menu and the docs at <a href="https://paperlessdebate.com" target="_blank">paperlessdebate.com</a> for workflow guides.</p>
+</body>
+</html>

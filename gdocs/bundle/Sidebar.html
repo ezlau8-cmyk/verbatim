@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<head>
+<base target="_top">
+<style>
+  :root {
+    --bg: #1a1d23;
+    --panel: #23272f;
+    --accent: #ffd166;
+    --accent2: #06d6a0;
+    --text: #e9ecef;
+    --muted: #9aa3ad;
+    --border: #2c3038;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 13px;
+    color: var(--text);
+    background: var(--bg);
+  }
+  body { padding: 8px 10px 14px; }
+  h1 {
+    margin: 0 0 8px;
+    font-size: 14px;
+    letter-spacing: 0.04em;
+    color: var(--accent);
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  h2 {
+    margin: 10px 0 4px;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-bottom: 4px; }
+  .row.full { grid-template-columns: 1fr; }
+  button {
+    background: var(--panel);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 6px 8px;
+    font-size: 12px;
+    font-family: inherit;
+    cursor: pointer;
+    transition: background 0.1s ease;
+    text-align: left;
+  }
+  button:hover { background: #2c313a; }
+  button.primary {
+    background: var(--accent);
+    color: #1a1d23;
+    font-weight: 600;
+    border-color: var(--accent);
+  }
+  button.primary:hover { background: #ffdb80; }
+  button.secondary {
+    background: transparent;
+    border-color: var(--border);
+    color: var(--muted);
+  }
+  .shortcut {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 10px;
+    color: var(--muted);
+    margin-left: 4px;
+  }
+  .input {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--text);
+    padding: 5px 7px;
+    font-family: inherit;
+    font-size: 12px;
+    width: 100%;
+  }
+  .footer {
+    margin-top: 10px;
+    font-size: 10px;
+    color: var(--muted);
+    text-align: center;
+  }
+  .footer a { color: var(--accent); text-decoration: none; }
+  hr { border: none; border-top: 1px solid var(--border); margin: 10px 0; }
+  .toast {
+    position: fixed;
+    left: 12px; right: 12px; bottom: 12px;
+    background: var(--accent2);
+    color: #0e1f1a;
+    padding: 8px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    display: none;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+  }
+  .toast.show { display: block; }
+</style>
+</head>
+<body>
+<h1>Verbatim</h1>
+
+<h2>Organize</h2>
+<div class="row full">
+  <button onclick="run('cmdPocket')">Pocket <span class="shortcut">F4</span></button>
+</div>
+<div class="row">
+  <button onclick="run('cmdHat')">Hat <span class="shortcut">F5</span></button>
+  <button onclick="run('cmdBlock')">Block <span class="shortcut">F6</span></button>
+</div>
+<div class="row">
+  <button onclick="run('cmdTag')">Tag <span class="shortcut">F7</span></button>
+  <button onclick="run('cmdCite')">Cite <span class="shortcut">F8</span></button>
+</div>
+<div class="row">
+  <button onclick="run('cmdMoveUp')">↑ Move</button>
+  <button onclick="run('cmdMoveDown')">↓ Move</button>
+</div>
+
+<h2>Format</h2>
+<div class="row">
+  <button onclick="run('cmdPasteText')">Paste Text <span class="shortcut">F2</span></button>
+  <button onclick="run('cmdCondense')">Condense <span class="shortcut">F3</span></button>
+</div>
+<div class="row">
+  <button onclick="run('cmdCondenseWithPilcrows')">Condense ¶</button>
+  <button onclick="run('cmdCondenseNoPilcrows')">Condense no ¶</button>
+</div>
+<div class="row">
+  <button onclick="run('cmdShrink')">Shrink <span class="shortcut">⌥F3</span></button>
+  <button onclick="run('cmdUnshrinkAll')">Unshrink</button>
+</div>
+<div class="row">
+  <button onclick="run('cmdHighlight')">Highlight <span class="shortcut">F11</span></button>
+  <button onclick="run('cmdUnderline')">Underline <span class="shortcut">F9</span></button>
+</div>
+<div class="row">
+  <button onclick="run('cmdEmphasis')">Emphasis <span class="shortcut">F10</span></button>
+  <button onclick="run('cmdClearFormatting')">Clear <span class="shortcut">F12</span></button>
+</div>
+
+<h2>Paperless</h2>
+<div class="row">
+  <button class="primary" onclick="run('cmdSendToSpeech')">Send To Speech <span class="shortcut">`</span></button>
+  <button onclick="run('cmdSendToSpeechEnd')">→ End</button>
+</div>
+<div class="row">
+  <button onclick="run('cmdMarkCard')">Mark Card</button>
+  <button onclick="run('cmdWordCount')">Word Count</button>
+</div>
+
+<h2>Speech Doc</h2>
+<div class="row full">
+  <input class="input" id="speechUrl" placeholder="Paste speech doc URL or ID…">
+</div>
+<div class="row">
+  <button onclick="bindSpeech()">Bind</button>
+  <button class="secondary" onclick="clearSpeech()">Clear</button>
+</div>
+
+<h2>Document</h2>
+<div class="row">
+  <button onclick="run('cmdNewDocument')">New File</button>
+  <button onclick="run('cmdNewSpeech')">New Speech</button>
+</div>
+<div class="row">
+  <button onclick="run('cmdInstallStyles')">Install Styles</button>
+  <button onclick="run('cmdDocStats')">Stats</button>
+</div>
+
+<h2>Tools</h2>
+<div class="row">
+  <button onclick="run('cmdAutoFormatCite')">Auto Cite</button>
+  <button onclick="run('cmdAutoNumberTags')"># Tags</button>
+</div>
+<div class="row">
+  <button onclick="run('cmdRemoveBlanks')">Rm Blanks</button>
+  <button onclick="run('cmdRemovePilcrows')">Rm ¶</button>
+</div>
+<div class="row">
+  <button onclick="run('cmdInsertHeader')">Insert Header</button>
+  <button onclick="run('cmdRemoveHyperlinks')">Rm Hyperlinks</button>
+</div>
+<div class="row full">
+  <button onclick="run('cmdMigrateFromWord')">Migrate From Word</button>
+</div>
+
+<div class="footer">
+  <a href="#" onclick="openCheatSheet(); return false;">Shortcuts</a> · <a href="#" onclick="openHelp(); return false;">Help</a>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+function run(name) {
+  google.script.run
+    .withSuccessHandler(msg => toast(msg || 'Done.'))
+    .withFailureHandler(err => toast('Error: ' + err.message, true))
+    [name]();
+}
+
+function bindSpeech() {
+  const v = document.getElementById('speechUrl').value.trim();
+  if (!v) { toast('Paste a URL or doc ID first.', true); return; }
+  const id = extractDocId_(v);
+  if (!id) { toast('That doesn\'t look like a Google Docs link.', true); return; }
+  google.script.run
+    .withSuccessHandler(_ => toast('Speech doc bound.'))
+    .withFailureHandler(err => toast('Error: ' + err.message, true))
+    .setActiveSpeechDoc(id);
+}
+
+function clearSpeech() {
+  google.script.run
+    .withSuccessHandler(_ => { document.getElementById('speechUrl').value = ''; toast('Cleared.'); })
+    .withFailureHandler(err => toast('Error: ' + err.message, true))
+    .setActiveSpeechDoc('');
+}
+
+function extractDocId_(url) {
+  // matches /d/<id> or a raw id (alphanumeric, dash, underscore, 25+ chars)
+  const m = url.match(/\/d\/([a-zA-Z0-9_-]{20,})/);
+  if (m) return m[1];
+  if (/^[a-zA-Z0-9_-]{20,}$/.test(url)) return url;
+  return null;
+}
+
+function openCheatSheet() {
+  google.script.run.showCheatSheet();
+}
+function openHelp() {
+  google.script.run.showHelp();
+}
+
+let toastTimer;
+function toast(msg, isError) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.style.background = isError ? '#ff5c5c' : '#06d6a0';
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 2200);
+}
+</script>
+</body>
+</html>
