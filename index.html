@@ -148,29 +148,23 @@
 
   <div class="step">
     <strong>Step 2 — Paste the five files</strong>
-    In the new tab, you'll see an empty script with a `function myFunction() {}` placeholder. The bundle below has <strong>five files total</strong>: one big <code>Code.gs</code> containing all the Verbatim modules, one <code>appsscript.json</code> manifest, and three HTML files. For each one:
+    In the new tab, you'll see an empty script with a `function myFunction() {}` placeholder. Below are <strong>five files</strong>. For each one:
     <ol>
       <li>Click the filename's <strong>Copy contents</strong> button (in this page).</li>
       <li>Switch to the Apps Script tab.</li>
-      <li>For <code>Code.gs</code>: just paste into the placeholder file, overwriting <code>myFunction</code>.</li>
-      <li>For other files: click <kbd>File → New → Script file</kbd> (or HTML file), type the filename exactly (including the extension), press Enter.</li>
-      <li>Paste the code you copied. <kbd>Cmd+S</kbd> (or <kbd>Ctrl+S</kbd>) to save.</li>
+      <li>For <code>Code.gs</code>: select all (Cmd+A) in the placeholder, delete, paste.</li>
+      <li>For the others: click <kbd>File → New → Script file</kbd> (or HTML file), type the filename exactly (including the extension — e.g. <code>Sidebar.html</code>), press Enter. Paste the contents you copied.</li>
+      <li>Save (Cmd+S / Ctrl+S).</li>
     </ol>
-    <p style="color: var(--muted); font-size: 13px;">Repeat for each file. <code>appsscript.json</code> is special — see step 3.</p>
+    <p style="color: var(--muted); font-size: 13px;">Tip: the filename must match exactly — including the <code>.html</code> extension — or Apps Script won't recognize it as an HTML file.</p>
   </div>
 
   <div class="progress"><div id="progress-bar"></div></div>
   <div id="file-list"></div>
 
   <div class="step">
-    <strong>Step 3 — Add the manifest file (<code>appsscript.json</code>)</strong>
-    In the Apps Script editor, click the <strong>Project Settings (⚙️)</strong> gear icon → check <strong>"Show 'appsscript.json' manifest in editor"</strong>. A new file appears in the left sidebar.
-    <ol>
-      <li>Click it. Delete its current contents.</li>
-      <li>Come back here, click <strong>Copy contents</strong> on the <code>appsscript.json</code> row.</li>
-      <li>Paste into the Apps Script manifest. <kbd>Cmd+S</kbd> to save.</li>
-    </ol>
-    <p style="color: var(--muted); font-size: 13px;">(If you're using the bundle and already created appsscript.json via File → New, just paste over its default contents.)</p>
+    <strong>Step 3 — Save the project</strong>
+    In the Apps Script tab, just press <kbd>Cmd+S</kbd> (or <kbd>Ctrl+S</kbd>) to save everything. Done. You don't need to touch Project Settings — all the file's required settings live inside <code>appsscript.json</code> which you already pasted.
   </div>
 
   <div class="step">
@@ -227,7 +221,7 @@
     <li><strong>"This app is blocked" / "Access denied" / "Apps Script is disabled":</strong> You're on the wrong account. Click your profile picture (top right of the Apps Script tab) and switch to your <strong>school account</strong>. Try Step 1 again.</li>
     <li><strong>OAuth consent doesn't show your school account:</strong> the Apps Script project opened in your personal Gmail. Close that tab, switch to your school account, click Step 1 again.</li>
     <li><strong>Menu doesn't show after install:</strong> hard-reload the Doc (<kbd>Cmd+Shift+R</kbd>). Wait 30 seconds. Apps Script caches add-on registration.</li>
-    <li><strong>"Can't find file appsscript.json":</strong> you didn't enable "Show manifest file" in Project Settings. See step 3.</li>
+    <li><strong>"Can't find file appsscript.json":</strong> you probably created it via File → New but typed a different name. The filename must be exactly <code>appsscript.json</code> (with the dot, in that case) for Apps Script to treat it as the manifest. If you don't see the file in the sidebar, check that it exists at all and the name matches.</li>
     <li><strong>Paste button copies nothing:</strong> your browser may be blocking clipboard access. Open the file manually at <a href="https://github.com/ezlau8-cmyk/verbatim/tree/master/gdocs/appsscript">github.com/ezlau8-cmyk/verbatim/tree/master/gdocs/appsscript</a>, copy from there.</li>
     <li><strong>"This script has too many OAuth scopes":</strong> your school admin may need to approve the scopes. Send IT this list: <code>documents.currentonly</code>, <code>script.container.ui</code>, <code>drive.file</code>.</li>
   </ol>
